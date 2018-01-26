@@ -30,6 +30,7 @@
 	{
 		idPlayer = id;
  		console.log('vous êtes connecté en tant que '+idPlayer);
+ 		$('#loginform').fadeOut();
 	});
 
 	socket.on('disusr',function(id)
@@ -117,7 +118,8 @@
  		{
  			ctx.fillRect(player.x,player.y,player.width,player.height);
  			ctx.fillStyle = player.color;
- 			ctx.font = "30px Arial";
+ 			ctx.font = "20px Arial";
+ 			ctx.fillStyle = 'black';
 			ctx.fillText(player.id,player.x,player.y-10); 
  		}
 
