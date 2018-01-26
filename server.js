@@ -20,6 +20,11 @@ var players = {};
 
 io.sockets.on('connection', function(socket)
 {
+	for(var k in players)
+	{
+		socket.emit('newusr',players[k]);
+	}
+
 	console.log('Nouvel utilisateur connecté');
 	socket.on('login',function(user)
 	{
