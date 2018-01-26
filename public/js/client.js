@@ -1,7 +1,7 @@
 (function($)
 {
 	var socket = io();
-	var players = {};
+	var players = [];
 	var idPlayer = '';
 
 	$('#loginform').submit(function(e)
@@ -16,17 +16,14 @@
 
 	socket.on('update', function(uPlayer)
 	{
-		for(var player in players)
- 		{
- 			if(uPlayer.id == player.id)
+		players.forEach(player =>
+		{
+			if(uPlayer.id == player.id)
 			{
 				player.x = uPlayer.x;
 				player.y = uPlayer.y;
 			}
- 		}
- 		/*players.forEach(player =>
-		{
-			});*/
+		});
 	});
 
 	socket.on('logged',function(id)
@@ -121,7 +118,7 @@
 			ctx.fillText(player.id,player.x,player.y-10); 
  		}
 
-		players[player.id] = player;
+		players.push(player);
 	});
 
 	function init()
@@ -135,16 +132,10 @@
  		ctx.clearRect(0,0,canvas.width,canvas.height);
  		if(players)
  		{
-
- 			for(var player in players)
- 			{
- 				player.update();
- 			}
-
-	 		/*players.forEach(player => 
+	 		players.forEach(player => 
 	 		{
 	 			player.update();
-	 		}); */
+	 		});
 	 	}
  	}
  	init();
