@@ -13,7 +13,7 @@ httpServer = http.createServer(function(req,res)
 	res.end('ça marche !');
 });
 
-httpServer.listen(app);
+httpServer.listen(1337);
 
 var io = require('socket.io').listen(httpServer);
 var players = {};
