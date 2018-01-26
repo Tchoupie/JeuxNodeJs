@@ -38,6 +38,7 @@
 		{
 			if(id == player.id)
 			{
+				console.log('suppression de'+players[id]);
 				delete players[id];
 			}
 		});
