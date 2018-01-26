@@ -13,8 +13,12 @@ var playerJS = require('./public/js/player');
 
 // httpServer.listen(1337);
 
-var server = app.listen(process.env.PORT  || 5000, () => console.log('All is ok'));
-var io = require('socket.io').listen(server);
+// var server = app.listen(process.env.PORT  || 5000, () => console.log('All is ok'));
+// var io = require('socket.io').listen(server);
+
+var server = require('http').createServer(app),
+var io = require('socket.io').listen(server),
+server.listen(process.env.PORT || 3000);
 var players = {};
 
 io.sockets.on('connection', function(socket)
