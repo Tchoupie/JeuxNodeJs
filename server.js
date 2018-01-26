@@ -3,19 +3,18 @@ const app = express();
 
 app.use(express.static('public'));
 
-app.listen(process.env.PORT  || 5000, () => console.log('All is ok'));
-
-var http = require('http');
+// var http = require('http');
 var playerJS = require('./public/js/player');
 
-httpServer = http.createServer(function(req,res)
-{
-	res.end('ça marche !');
-});
+// httpServer = http.createServer(function(req,res)
+// {
+// 	res.end('ça marche !');
+// });
 
-httpServer.listen(1337);
+// httpServer.listen(1337);
 
-var io = require('socket.io').listen(httpServer);
+var server = app.listen(process.env.PORT  || 5000, () => console.log('All is ok'));
+var io = require('socket.io').listen(server);
 var players = {};
 
 io.sockets.on('connection', function(socket)
