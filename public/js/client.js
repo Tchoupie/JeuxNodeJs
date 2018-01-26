@@ -32,6 +32,17 @@
  		console.log('vous êtes connecté en tant que '+idPlayer);
 	});
 
+	socket.on('disusr',function(id)
+	{
+		players.forEach(player =>
+		{
+			if(id == player.id)
+			{
+				delete players[id];
+			}
+		});
+	});
+
 	socket.on('newusr',function(player)
 	{	
 		player.update =  function()

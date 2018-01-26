@@ -20,6 +20,8 @@ var players = {};
 
 io.sockets.on('connection', function(socket)
 {
+	var me = false;
+
 	for(var k in players)
 	{
 		socket.emit('newusr',players[k]);
@@ -47,5 +49,15 @@ io.sockets.on('connection', function(socket)
 	socket.on('update',function(player)
 	{
 		socket.broadcast.emit('update',player);
+	});
+
+	socket.on('disconnect', function()
+	{
+		if(!me)
+		{
+			return false;
+		}
+		delete players[me.id];
+		io.sockets.emit(disusr,me.id);
 	});
 });
