@@ -3,4 +3,4 @@ const app = express();
 
 app.use(express.static('public'));
 
-app.listen(process.env.PORT  || 8000, () => console.log('All is ok'));
+app.listen(process.env.PORT  || 5000, () => console.log('All is ok'));
