@@ -1,3 +1,10 @@
+const express = require('express');
+const app = express();
+
+app.use(express.static('public'));
+
+app.listen(process.env.PORT  || 5000, () => console.log('All is ok'));
+
 var http = require('http');
 var playerJS = require('./public/js/player');
 
