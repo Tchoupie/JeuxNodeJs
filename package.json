@@ -2,15 +2,22 @@
    "name": "JeuxNodesJs",
    "version": "0.1.0",
    "description": "Un simple jeux nodejs",
-   "engines": {
+
+   "engines": 
+   {
       "node": "9.4.0"
    },
-   "dependencies": {
+
+   "dependencies": 
+   {
       "express": "^4.16.2",
-      "socket.io": "^2.0.4",
+      "socket.io": "^2.0.4"
    },
+
    "main": "index.js",
-   "scripts": {
+
+   "scripts": 
+   {
     "start": "node index.js",
     "test": "node test.js"
 	},
