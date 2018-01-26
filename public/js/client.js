@@ -34,15 +34,18 @@
 
 	socket.on('disusr',function(id)
 	{
+		var idPlayerToDelete = 0;
+		var i = 0;
 		players.forEach(player =>
 		{
 			if(id == player.id)
 			{
 				console.log('suppression de'+ player.id);
-				delete player;
-				console.log(players);
+				var idPlayerToDelete = i;
 			}
+			i++;
 		});
+		players.splice(idPlayerToDelete,1);
 	});
 
 	socket.on('newusr',function(player)
