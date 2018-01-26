@@ -58,6 +58,6 @@ io.sockets.on('connection', function(socket)
 			return false;
 		}
 		delete players[me.id];
-		io.sockets.emit(disusr,me.id);
+		io.sockets.emit('disusr',me.id);
 	});
 });
