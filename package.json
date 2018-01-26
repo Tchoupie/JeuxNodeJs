@@ -14,7 +14,7 @@
       "socket.io": "^2.0.4"
    },
 
-   "main": "index.js",
+   "main": "server.js",
 
    "scripts": 
    {
