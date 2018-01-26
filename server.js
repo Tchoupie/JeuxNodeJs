@@ -1,6 +1,6 @@
 
 var http = require('http');
-var playerJS = require('./js/player');
+var playerJS = require('./public/js/player');
 
 httpServer = http.createServer(function(req,res)
 {
