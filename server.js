@@ -5,17 +5,17 @@ app.use(express.static('public'));
 
 app.listen(process.env.PORT  || 5000, () => console.log('All is ok'));
 
-// var http = require('http');
+var http = require('http');
 var playerJS = require('./public/js/player');
 
-// httpServer = http.createServer(function(req,res)
-// {
-// 	res.end('ça marche !');
-// });
+httpServer = http.createServer(function(req,res)
+{
+	res.end('ça marche !');
+});
 
-// httpServer.listen(1337);
+httpServer.listen(app);
 
-var io = require('socket.io').listen(app);
+var io = require('socket.io').listen(httpServer);
 var players = {};
 
 io.sockets.on('connection', function(socket)
