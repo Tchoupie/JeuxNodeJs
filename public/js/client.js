@@ -38,8 +38,8 @@
 		{
 			if(id == player.id)
 			{
-				console.log('suppression de'+players[id]);
-				delete players[id];
+				console.log('suppression de'+ player);
+				delete player;
 			}
 		});
 	});
