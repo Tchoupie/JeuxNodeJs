@@ -5,6 +5,11 @@
 	var obstacles = [];
 	var idPlayer = '';
 	$('#resetform').hide();
+	
+	if(idPlayer == "Tchoupie")
+ 	{
+ 		$('#resetform').show();
+ 	}
 
 	$('#loginform').submit(function(e)
 	{
@@ -39,10 +44,6 @@
 		idPlayer = id;
  		console.log('vous êtes connecté en tant que '+idPlayer);
  		$('#loginform').fadeOut();
- 		if(idPlayer == "Tchoupie")
- 		{
- 			$('#resetform').fadeIn();
- 		}
 	});
 
 	socket.on('newobs',function(obstacle)
