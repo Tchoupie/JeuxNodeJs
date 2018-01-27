@@ -1,6 +1,6 @@
 (function($)
 {
-	var socket = io();
+	var socket = io({transports: ['websocket'], upgrade: false});
 	var players = [];
 	var obstacles = [];
 	var idPlayer = '';
@@ -76,14 +76,14 @@
 
 	socket.on('disusr',function(id)
 	{
-		var idPlayerToDelete = 0;
+		var idPlayerToDelete;
 		var i = 0;
 		players.forEach(player =>
 		{
 			if(id == player.id)
 			{
 				console.log('suppression de'+ player.id);
-				var idPlayerToDelete = i;
+				idPlayerToDelete = i;
 			}
 			i++;
 		});

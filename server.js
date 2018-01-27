@@ -122,6 +122,6 @@ io.sockets.on('connection', function(socket)
 			return false;
 		}
 		delete players[me.id];
-		io.sockets.emit('disusr',me.id);
+		socket.broadcast.emit('disusr',me.id);
 	});
 });
