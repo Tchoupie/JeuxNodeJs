@@ -4,11 +4,14 @@
 	var players = [];
 	var obstacles = [];
 	var idPlayer = '';
-	$('#resetform').hide();
 	
 	if(idPlayer == "Tchoupie")
  	{
  		$('#resetform').show();
+ 	}
+ 	else
+ 	{
+ 		$('#resetform').hide();
  	}
 
 	$('#loginform').submit(function(e)
