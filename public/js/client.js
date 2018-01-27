@@ -121,7 +121,10 @@
  			}
  			else
  			{
- 				player.velocity.y += 1;
+ 				if(player.isOnAir)
+ 				{
+ 					player.velocity.y += 1;
+ 				}
  			}
 
  			if(idPlayer == player.id)
@@ -167,8 +170,8 @@
 
  		player.draw = function()
  		{
- 			ctx.fillRect(player.x,player.y,player.width,player.height);
  			ctx.fillStyle = player.color;
+ 			ctx.fillRect(player.x,player.y,player.width,player.height);
  			ctx.font = "20px Arial";
 			ctx.fillText(player.id,player.x,player.y-10); 
  		}
