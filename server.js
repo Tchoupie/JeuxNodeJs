@@ -5,6 +5,11 @@ app.use(express.static('public'));
 
 // var http = require('http');
 var playerJS = require('./public/js/player');
+var obstacleJS = require('./js/obstacle');
+function randomIntFromRange(min, max)
+{
+ 	return Math.floor(Math.random() * (max - min + 1) + min)
+}
 
 // httpServer = http.createServer(function(req,res)
 // {
@@ -17,6 +22,31 @@ var server = app.listen(process.env.PORT  || 5000, () => console.log('All is ok'
 var io = require('socket.io').listen(server);
 
 var players = {};
+var obstacles = [];
+
+	for(var i=0;i<4;i++)
+	{
+
+		let width=randomIntFromRange(100,500);
+		let height=25;
+		let x;
+		let y;
+		if(i%2==0)
+		{
+			y=randomIntFromRange(0+height,250);
+			x=randomIntFromRange(0+width,500);
+		}
+		else
+		{
+			y=randomIntFromRange(250,450);
+			x=randomIntFromRange(500,1000-width);
+		}
+
+		let color='blue';
+		var obstacle = obstacleJS.new(x,y,width,height,color);
+		obstacles[i]=obstacle;
+		// socket.emit('newobs',obstacle);
+	}
 
 io.sockets.on('connection', function(socket)
 {
@@ -25,6 +55,11 @@ io.sockets.on('connection', function(socket)
 	for(var k in players)
 	{
 		socket.emit('newusr',players[k]);
+	}
+
+	for(k in obstacles)
+	{
+		socket.emit('newobs',obstacles[k]);
 	}
 
 	console.log('Nouvel utilisateur connecté');
@@ -51,6 +86,35 @@ io.sockets.on('connection', function(socket)
 		socket.broadcast.emit('update',player);
 	});
 
+	socket.on('reset',function()
+	{
+		obstacles = new Array();
+		io.sockets.emit('reset');
+		for(var i=0;i<4;i++)
+		{
+
+			let width=randomIntFromRange(100,500);
+			let height=25;
+			let x;
+			let y;
+			if(i%2==0)
+			{
+				y=randomIntFromRange(0+height,250);
+				x=randomIntFromRange(0+width,500);
+			}
+			else
+			{
+				y=randomIntFromRange(250,450);
+				x=randomIntFromRange(500,1000-width);
+			}
+
+			let color='blue';
+			var obstacle = obstacleJS.new(x,y,width,height,color);
+			obstacles[i]=obstacle;
+			io.sockets.emit('newobs',obstacle);
+		}
+	});
+	
 	socket.on('disconnect', function()
 	{
 		if(!me)

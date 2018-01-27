@@ -2,7 +2,9 @@
 {
 	var socket = io();
 	var players = [];
+	var obstacles = [];
 	var idPlayer = '';
+	$('#resetform').hide();
 
 	$('#loginform').submit(function(e)
 	{
@@ -12,6 +14,12 @@
 			username : $('#username').val(),
 			mail : $('#mail').val(),
 		});
+	});
+
+	$('#resetform').submit(function(e)
+	{
+		e.preventDefault();
+		socket.emit('reset');
 	});
 
 	socket.on('update', function(uPlayer)
@@ -31,6 +39,31 @@
 		idPlayer = id;
  		console.log('vous êtes connecté en tant que '+idPlayer);
  		$('#loginform').fadeOut();
+ 		if(idPlayer == "Tchoupie")
+ 		{
+ 			$('#resetform').fadeIn();
+ 		}
+	});
+
+	socket.on('newobs',function(obstacle)
+	{
+		obstacle.update = function()
+		{
+			obstacle.draw();
+		}
+
+		obstacle.draw = function()
+		{
+			ctx.fillStyle = obstacle.color;
+			ctx.fillRect(obstacle.x,obstacle.y,obstacle.width,obstacle.height);
+		}
+
+		obstacles.push(obstacle);
+	});
+
+	socket.on('reset',function ()
+	{
+		obstacles = new Array();
 	});
 
 	socket.on('disusr',function(id)
@@ -62,6 +95,24 @@
  			{
  				player.isOnAir=true;
  			}
+
+ 			for(let i=0; i < obstacles.length;i++)
+			{
+				if((obstacles[i].x <= player.x+player.width  &&  player.x <= obstacles[i].x+obstacles[i].width) && (player.y+player.height>=(obstacles[i].y) && obstacles[i].y+(obstacles[i].height) >= player.y+player.height))
+				{
+					console.log(player.id+" est rentré en collision par dessus");
+					player.velocity.y = 0;
+					player.y = obstacles[i].y-player.height;
+					player.isOnAir=false;
+				}
+
+				if((obstacles[i].x <= player.x+player.width  &&  player.x <= obstacles[i].x+obstacles[i].width) && (player.y<=obstacles[i].y+(obstacles[i].height) && obstacles[i].y <= player.y))
+				{
+					player.velocity.y = 0;
+					console.log(player.id+" est rentré en collision par en dessous");
+					player.y = obstacles[i].y+obstacles[i].height;
+				}
+			}
 
  			if(player.y+player.height>=canvas.height)
  			{
@@ -134,6 +185,13 @@
  	{
  		requestAnimationFrame(animate);
  		ctx.clearRect(0,0,canvas.width,canvas.height);
+ 		if(obstacles)
+	 	{
+	 		obstacles.forEach(obstacle =>
+	 		{
+	 			obstacle.update();
+	 		});
+	 	}
  		if(players)
  		{
 	 		players.forEach(player => 
