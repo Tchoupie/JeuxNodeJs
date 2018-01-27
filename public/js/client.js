@@ -47,6 +47,10 @@
 		idPlayer = id;
  		console.log('vous êtes connecté en tant que '+idPlayer);
  		$('#loginform').fadeOut();
+ 		if(idPlayer == "Tchoupie")
+ 		{
+ 			$('#resetform').show();
+ 		}
 	});
 
 	socket.on('newobs',function(obstacle)
