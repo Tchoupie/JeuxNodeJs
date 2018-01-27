@@ -5,7 +5,7 @@ app.use(express.static('public'));
 
 // var http = require('http');
 var playerJS = require('./public/js/player');
-var obstacleJS = require('./js/obstacle');
+var obstacleJS = require('./public/js/obstacle');
 function randomIntFromRange(min, max)
 {
  	return Math.floor(Math.random() * (max - min + 1) + min)
@@ -114,7 +114,7 @@ io.sockets.on('connection', function(socket)
 			io.sockets.emit('newobs',obstacle);
 		}
 	});
-	
+
 	socket.on('disconnect', function()
 	{
 		if(!me)
