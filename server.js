@@ -6,6 +6,7 @@ app.use(express.static('public'));
 // var http = require('http');
 var playerJS = require('./public/js/player');
 var obstacleJS = require('./public/js/obstacle');
+var goalBallJS = require('./public/js/goalBall');
 
 function randomIntFromRange(min, max)
 {
@@ -85,7 +86,7 @@ var obstacles = [];
 		obstacles[i]=obstacle;
 		// socket.emit('newobs',obstacle);
 	}
-	
+
 	let x = randomIntFromRange(20,950);
 	let y = 35;
 	let radius = 20;
