@@ -8,9 +8,15 @@ var playerJS = require('./public/js/player');
 var obstacleJS = require('./public/js/obstacle');
 var goalBallJS = require('./public/js/goalBall');
 
+
 function randomIntFromRange(min, max)
 {
  	return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+function sleep(seconds){
+    var waitUntil = new Date().getTime() + seconds*1000;
+    while(new Date().getTime() < waitUntil) true;
 }
 
 function isCollided(x,y)
@@ -134,6 +140,7 @@ io.sockets.on('connection', function(socket)
 
 	socket.on('goal', function(idPlayer)
 	{
+		sleep(1000);
 		//On reset les obsacles
 		obstacles = new Array();
 		io.sockets.emit('reset');

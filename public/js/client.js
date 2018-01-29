@@ -168,7 +168,7 @@
 			{
 				setTimeout(function()
 				{
-    			console.log('wait...')
+    				console.log('wait...');
 				}, 2000);
 				console.log('goal !')
 				socket.emit('goal',player.id);
