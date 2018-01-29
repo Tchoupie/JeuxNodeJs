@@ -4,7 +4,8 @@
 	var players = [];
 	var obstacles = [];
 	var idPlayer = '';
-	
+	var goalBall;	
+
 	if(idPlayer == "Tchoupie")
  	{
  		$('#resetform').show();
@@ -53,6 +54,46 @@
  		}
 	});
 
+	socket.on('resetPos',function()
+	{
+		players.forEach(player => 
+		{
+			player.x = 60;
+			player.y = 10;
+		});
+	});
+
+	socket.on('goal',function(idPlayer)
+	{
+		$('#scores').empty();
+		players.forEach(player => 
+		{
+			if(player.id == idPlayer)
+			{
+				player.score++;
+				$('#scores').append('<p>'+ player.id + ' : '+ player.score +' point(s)</p>');
+			}
+		});
+	});
+
+	socket.on('newgoal',function(OgoalBall)
+	{
+		OgoalBall.update = function()
+		{
+			OgoalBall.draw();
+		}
+
+		OgoalBall.draw = function()
+		{
+			ctx.beginPath();
+	 		ctx.arc(OgoalBall.x, OgoalBall.y, OgoalBall.radius, 0, Math.PI * 2, false);
+	 		ctx.fillStyle = OgoalBall.color;
+ 			ctx.fill();
+ 			ctx.closePath();
+		}
+		goalBall = OgoalBall;
+	});
+
 	socket.on('newobs',function(obstacle)
 	{
 		obstacle.update = function()
@@ -72,6 +113,7 @@
 	socket.on('reset',function ()
 	{
 		obstacles = new Array();
+		var goalBall;
 	});
 
 	socket.on('disusr',function(id)
@@ -104,11 +146,11 @@
  				player.isOnAir=true;
  			}
 
+ 			//Collision avec les obstacles
  			for(let i=0; i < obstacles.length;i++)
 			{
 				if((obstacles[i].x <= player.x+player.width  &&  player.x <= obstacles[i].x+obstacles[i].width) && (player.y+player.height>=(obstacles[i].y) && obstacles[i].y+(obstacles[i].height) >= player.y+player.height))
 				{
-					console.log(player.id+" est rentré en collision par dessus");
 					player.velocity.y = 0;
 					player.y = obstacles[i].y-player.height;
 					player.isOnAir=false;
@@ -117,9 +159,15 @@
 				if((obstacles[i].x <= player.x+player.width  &&  player.x <= obstacles[i].x+obstacles[i].width) && (player.y<=obstacles[i].y+(obstacles[i].height) && obstacles[i].y <= player.y))
 				{
 					player.velocity.y = 0;
-					console.log(player.id+" est rentré en collision par en dessous");
 					player.y = obstacles[i].y+obstacles[i].height;
 				}
+			}
+
+			//Collision avec la goalBall
+			if((player.x+(player.width/2) > goalBall.x-goalBall.radius && player.x+(player.width/2) < goalBall.x+goalBall.radius) && (player.y+(player.height/2) > goalBall.y-goalBall.radius && player.y+(player.height/2) < goalBall.y+goalBall.radius))
+			{
+				console.log('goal !');
+				socket.emit('goal',player.id);
 			}
 
  			if(player.y+player.height>=canvas.height)
@@ -144,11 +192,11 @@
 	 			}
 	 			else
 	 			{
-	 				if(keyPress=='d')
+	 				if(keyPress=='d' && player.velocity.x<10)
 	 				{
 	 					player.velocity.x += 1;
 	 				}
-	 				if(keyPress=='q')
+	 				if(keyPress=='q' && player.velocity.x>-10)
 	 				{
 	 					player.velocity.x -= 1;
 	 				}
@@ -185,6 +233,8 @@
  		}
 
 		players.push(player);
+
+		$('#scores').append('<p>'+ player.id + ' : '+ player.score +' point(s)</p>');
 	});
 
 	function init()
@@ -209,6 +259,10 @@
 	 		{
 	 			player.update();
 	 		});
+	 	}
+	 	if(goalBall)
+	 	{
+	 		goalBall.update();
 	 	}
  	}
  	init();
