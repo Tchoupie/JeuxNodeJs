@@ -96,6 +96,8 @@ io.sockets.on('connection', function(socket)
 {
 	var me = false;
 
+	socket.emit('newgoal',goalBall);
+
 	for(var k in players)
 	{
 		socket.emit('newusr',players[k]);
