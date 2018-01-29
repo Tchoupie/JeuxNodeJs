@@ -169,7 +169,7 @@
 			{	
 				if(!player.isGoal)
 				{
-					console.log('goal !' + player.isGoal);
+					console.log('goal !' + player.score);
 					player.isGoal = true;
 					socket.emit('goal',player.id);
 				}
