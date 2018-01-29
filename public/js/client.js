@@ -39,6 +39,7 @@
 			{
 				player.x = uPlayer.x;
 				player.y = uPlayer.y;
+				player.score = uPlayer.score;
 			}
 		});
 	});
