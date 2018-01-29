@@ -72,6 +72,7 @@
 			{
 				player.score++;
 				$('#scores').append('<p>'+ player.id + ' : '+ player.score +' point(s)</p>');
+				player.isGoal = false;
 			}
 		});
 	});
@@ -165,9 +166,13 @@
 
 			//Collision avec la goalBall
 			if((player.x+(player.width/2) > goalBall.x-goalBall.radius && player.x+(player.width/2) < goalBall.x+goalBall.radius) && (player.y+(player.height/2) > goalBall.y-goalBall.radius && player.y+(player.height/2) < goalBall.y+goalBall.radius))
-			{
-				console.log('goal !')
-				socket.emit('goal',player.id);
+			{	
+				if(!player.isGoal)
+				{
+					console.log('goal !')
+					socket.emit('goal',player.id);
+					isGoal = true;
+				}
 			}
 
  			if(player.y+player.height>=canvas.height)

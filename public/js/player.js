@@ -13,7 +13,8 @@
  		this.isOnAir = true;
  		this.id = id;
  		this.score = 0;
- 		
+ 		this.isGoal = false;
+
  		this.update = () =>
  		{
  			//On vérifie l'état avant de faire quoi que ce soit
