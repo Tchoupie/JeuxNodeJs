@@ -170,8 +170,8 @@
 				if(!player.isGoal)
 				{
 					console.log('goal !')
-					socket.emit('goal',player.id);
 					isGoal = true;
+					socket.emit('goal',player.id);
 				}
 			}
 
