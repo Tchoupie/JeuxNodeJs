@@ -200,7 +200,7 @@ io.sockets.on('connection', function(socket)
 			for(k in players)
 			{
 				players[k].x = 60;
-				players[k].y = 10;
+				players[k].y = 300;
 			}
 			io.sockets.emit('goal',idPlayer);
 		}

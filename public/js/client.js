@@ -60,7 +60,7 @@
 		players.forEach(player => 
 		{
 			player.x = 60;
-			player.y = 10;
+			player.y = 300;
 		});
 	});
 
