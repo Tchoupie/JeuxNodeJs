@@ -72,9 +72,9 @@
 			if(player.id == idPlayer)
 			{
 				player.score++;
-				$('#scores').append('<p>'+ player.id + ' : '+ player.score +' point(s)</p>');
 				player.isGoal = false;
 			}
+			$('#scores').append('<p>'+ player.id + ' : '+ player.score +' point(s)</p>');
 		});
 	});
 
