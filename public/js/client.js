@@ -166,7 +166,11 @@
 			//Collision avec la goalBall
 			if((player.x+(player.width/2) > goalBall.x-goalBall.radius && player.x+(player.width/2) < goalBall.x+goalBall.radius) && (player.y+(player.height/2) > goalBall.y-goalBall.radius && player.y+(player.height/2) < goalBall.y+goalBall.radius))
 			{
-				console.log('goal !');
+				setTimeout(function()
+				{
+    			console.log('wait...')
+				}, 2000);
+				console.log('goal !')
 				socket.emit('goal',player.id);
 			}
 

@@ -134,10 +134,6 @@ io.sockets.on('connection', function(socket)
 
 	socket.on('goal', function(idPlayer)
 	{
-		setTimeout(function()
-		{
-    	//do what you need here
-		}, 2000);
 		//On reset les obsacles
 		obstacles = new Array();
 		io.sockets.emit('reset');
