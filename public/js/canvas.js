@@ -30,6 +30,7 @@
  			else
  			{
  				keyPress = 'none';	
+ 				lastKeyPress = 'none';
  			}
  		}
 
