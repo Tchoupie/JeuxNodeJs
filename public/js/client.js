@@ -200,11 +200,11 @@
 	 			{
 	 				if(keyPress=='d' && player.velocity.x<10)
 	 				{
-	 					player.velocity.x += 1;
+	 					player.velocity.x = 9;
 	 				}
 	 				if(keyPress=='q' && player.velocity.x>-10)
 	 				{
-	 					player.velocity.x -= 1;
+	 					player.velocity.x = -9;
 	 				}
 	 				if(keyPress==' ' && player.velocity.y==0 && !player.isOnAir)
 	 				{		

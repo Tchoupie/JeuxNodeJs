@@ -9,7 +9,6 @@
 
  	window.addEventListener('keydown',function(e)
  	{
- 		lastKeyPress = 'none';
  		keyPress = e.key;
  		if(e.key=='d' || e.key=='q')
  		{
