@@ -5,9 +5,11 @@
  	canvas.width = 1000;
  	canvas.height = 500;
  	var keyPress = 'none';
- 	var lastKeyPress = '';
+ 	var lastKeyPress = 'none';
+
  	window.addEventListener('keydown',function(e)
  	{
+ 		lastKeyPress = 'none';
  		keyPress = e.key;
  		if(e.key=='d' || e.key=='q')
  		{
@@ -17,16 +19,29 @@
 
  	window.addEventListener('keyup',function(e)
  	{
+
+ 		console.log(lastKeyPress);
  		if(e.key=='d' || e.key=='q')
  		{
- 			keyPress = 'none';
- 		}
- 		else
- 		{
- 			if(e.key==' ')
+ 			if((e.key=='d' && lastKeyPress=='q') || (e.key=='q' && lastKeyPress=='d'))
  			{
- 				console.log(lastKeyPress);
- 				keyPress == lastKeyPress;
+ 				keyPress = lastKeyPress;
+ 			}
+ 			else
+ 			{
+ 				keyPress = 'none';	
+ 			}
+ 		}
+
+ 		if(e.key==' ')
+ 		{ 
+ 			if((lastKeyPress=='q' || lastKeyPress=='d'))
+ 			{
+ 				keyPress=lastKeyPress;
+ 			}
+ 			else
+ 			{
+ 				keyPress='none';
  			}
  		}
  	});
