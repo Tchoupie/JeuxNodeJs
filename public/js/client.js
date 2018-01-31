@@ -213,11 +213,11 @@
 	 				socket.emit('update',player);
 	 			}
 	 		}
- 			if(player.x+player.width > canvas.width || player.x-player.width < 0)
+ 			if(player.x+player.width > canvas.width || player.x <= 0)
  			{
- 				if(player.x-player.width < 0)
+ 				if(player.x <= 0)
  				{
- 					player.x=player.width;
+ 					player.x=1;
  				}
  				if(player.x+player.width > canvas.width)
  				{
