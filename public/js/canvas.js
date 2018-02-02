@@ -4,6 +4,7 @@
 
  	canvas.width = 1000;
  	canvas.height = 500;
+ 	ctx.imageSmoothingEnabled = false;
  	var keyPress = 'none';
  	var lastKeyPress = 'none';
 
