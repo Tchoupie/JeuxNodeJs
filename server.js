@@ -120,7 +120,7 @@ io.sockets.on('connection', function(socket)
 		me = user;
 		me.id = user.mail.replace('@','-').replace('.','-');
 
-		let height=50;
+		let height=85;
  		let x=60;
  		let y=50;
  		let color = 'red';

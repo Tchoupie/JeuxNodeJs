@@ -136,6 +136,13 @@
 
 	socket.on('newusr',function(player)
 	{	
+		player.sprites = new Image();
+		player.sprites.onload = function()
+ 		{
+ 			var s= 30/12;
+ 			ctx.drawImage(player.sprites, 0,player.srcY, 64,64, player.x-12*s,player.y-12*s, 64*s,64*s );
+ 		}
+ 		player.sprites.src = "js/garcon2Sheet.png";
 		player.update =  function()
 		{
 			//On vérifie l'état avant de faire quoi que ce soit
@@ -200,11 +207,13 @@
 	 			{
 	 				if(keyPress=='d' && player.velocity.x<10)
 	 				{
-	 					player.velocity.x = 9;
+	 					player.velocity.x = 6;
+	 					player.isLeft = false;
 	 				}
 	 				if(keyPress=='q' && player.velocity.x>-10)
 	 				{
-	 					player.velocity.x = -9;
+	 					player.velocity.x = -6;
+	 					player.isLeft = true;
 	 				}
 	 				if(keyPress==' ' && player.velocity.y==0 && !player.isOnAir)
 	 				{		
@@ -227,13 +236,46 @@
  			}
  			player.y += player.velocity.y;
  			player.x += player.velocity.x;
+
+ 			if(player.velocity.x == 0 && !player.isLeft)
+ 			{
+ 				player.srcY=0;
+ 				player.step=0;
+ 			}
+
+ 			if(player.velocity.x == 0 && player.isLeft)
+ 			{
+ 				player.srcY=64;
+ 				player.step=10;
+ 			}
+
+ 			if(!player.isLeft && player.velocity.x > 0)
+ 			{
+ 				player.srcY = 0;
+ 				player.step+=0.25;
+ 				if(player.step>=11)
+ 				{
+ 					player.step-=11;
+ 				}
+ 			}
+
+ 			if(player.isLeft && player.velocity.x < 0)
+ 			{
+ 				player.srcY = 64;
+ 				player.step+=0.25;
+ 				if(player.step>=11)
+ 				{
+ 					player.step-=11;
+ 				}
+ 			}
+
  			player.draw();
  		}
 
  		player.draw = function()
  		{
- 			ctx.fillStyle = player.color;
- 			ctx.fillRect(player.x,player.y,player.width,player.height);
+ 			var s= 30/12;
+ 			ctx.drawImage(player.sprites, 64*Math.floor(player.step), player.srcY, 64,64, player.x-12*s,player.y-12*s, 64*s,64*s );
  			ctx.font = "20px Arial";
 			ctx.fillText(player.id,player.x,player.y-10); 
  		}
