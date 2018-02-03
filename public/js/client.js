@@ -311,15 +311,26 @@
 		$('#scores').append('<p>'+ player.id + ' : '+ player.score +' point(s)</p>');
 	});
 
+
+	var bg = new Image();
 	function init()
 	{
 		console.log('Initialisation...');
+		bg.onload = function()
+ 		{
+ 			var s= 30/12;
+ 			ctx.drawImage(bg, 0, 0, 1024, 640, 0,0, 1024*s,1024*s );
+ 		}
+ 		bg.src = "js/backgroundJeuxNode.png";
 	}
 
 	function animate()
  	{
  		requestAnimationFrame(animate);
  		ctx.clearRect(0,0,canvas.width,canvas.height);
+ 		var s= 100/12;
+ 		ctx.drawImage(bg, 0, 573, 1024, 640, 0,0, 1024*s,640*s );
+ 		if(obstacles)
  		if(obstacles)
 	 	{
 	 		obstacles.forEach(obstacle =>

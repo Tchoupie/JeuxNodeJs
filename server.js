@@ -53,6 +53,10 @@ var obstacles = [];
 	{
 
 		let width=randomIntFromRange(100,500);
+		while(width%32!=0)
+		{
+			width=randomIntFromRange(100,500);
+		}
 		let height=25;
 		let x;
 		let y;
@@ -147,6 +151,10 @@ io.sockets.on('connection', function(socket)
 		{
 
 			let width=randomIntFromRange(100,500);
+			while(width%32!=0)
+			{
+				width=randomIntFromRange(100,500);
+			}
 			let height=25;
 			let x;
 			let y;
@@ -214,6 +222,10 @@ io.sockets.on('connection', function(socket)
 		{
 
 			let width=randomIntFromRange(100,500);
+			while(width%32!=0)
+			{
+				width=randomIntFromRange(100,500);
+			}
 			let height=25;
 			let x;
 			let y;
