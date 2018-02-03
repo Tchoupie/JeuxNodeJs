@@ -5,7 +5,9 @@ function Obstacle(x,y,width,height,color)
 	this.width = width;
 	this.height = height;
 	this.color = color;
-
+	this.step = 0;
+ 	this.srcY = 0;
+	
 	this.update = function()
 	{
 		this.draw();

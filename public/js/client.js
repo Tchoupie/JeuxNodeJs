@@ -40,6 +40,8 @@
 				player.x = uPlayer.x;
 				player.y = uPlayer.y;
 				player.score = uPlayer.score;
+				player.isLeft = uPlayer.isLeft;
+				player.velocity.x = uPlayer.velocity.x;
 			}
 		});
 	});
@@ -98,6 +100,14 @@
 
 	socket.on('newobs',function(obstacle)
 	{
+		obstacle.sprites = new Image();
+		obstacle.sprites.onload = function()
+		{
+			var s= 30/12;
+ 			ctx.drawImage(obstacle.sprites, 0,obstacle.srcY, 32,32, obstacle.x-12*s,obstacle.y-12*s, 32*s,32*s );
+		}
+		obstacle.sprites.src = "js/spritePlat.png";
+		
 		obstacle.update = function()
 		{
 			obstacle.draw();
@@ -105,8 +115,24 @@
 
 		obstacle.draw = function()
 		{
-			ctx.fillStyle = obstacle.color;
-			ctx.fillRect(obstacle.x,obstacle.y,obstacle.width,obstacle.height);
+			var s= 30/12;
+			var nbBlock = Math.floor(obstacle.width/32);
+			for(var i = 0;i<nbBlock;i++)
+			{
+				if(i%1==0)
+				{
+					obstacle.step=0;
+				}
+				if(i%2==0)
+				{
+					obstacle.step=2;
+				}
+				if(i%3==0)
+				{
+					obstacle.step=1;
+				}
+ 				ctx.drawImage(obstacle.sprites, obstacle.step*32,obstacle.srcY, 32,32, (obstacle.x+(i*32))-8*s,obstacle.y-11*s, 32*s,32*s );
+ 			}
 		}
 
 		obstacles.push(obstacle);
