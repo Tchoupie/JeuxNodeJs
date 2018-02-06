@@ -98,6 +98,7 @@
 
 		OgoalBall.draw = function()
 		{
+			var s= 30/12;
 			/*ctx.beginPath();
 	 		ctx.arc(OgoalBall.x, OgoalBall.y, OgoalBall.radius, 0, Math.PI * 2, false);
 	 		ctx.fillStyle = OgoalBall.color;
