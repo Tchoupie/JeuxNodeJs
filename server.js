@@ -67,7 +67,7 @@ var obstacles = [];
 		}
 		else
 		{
-			y=randomIntFromRange(250,450);
+			y=randomIntFromRange(250,400);
 			x=randomIntFromRange(500,1000-width);
 		}
 
@@ -84,7 +84,7 @@ var obstacles = [];
 					}
 					else
 					{	
-						y=randomIntFromRange(250,450);
+						y=randomIntFromRange(250,400);
 						x=randomIntFromRange(500,1000-width);
 					}
 					j=-1;
@@ -97,9 +97,9 @@ var obstacles = [];
 		// socket.emit('newobs',obstacle);
 	}
 
-	let x = randomIntFromRange(20,950);
+	let x = randomIntFromRange(150,950);
 	let y = 35;
-	let radius = 20;
+	let radius = 60;
 	let color = 'green';
 	var goalBall = goalBallJS.new(x,y,radius,color);
 io.sockets.on('connection', function(socket)
@@ -165,7 +165,7 @@ io.sockets.on('connection', function(socket)
 			}
 			else
 			{
-				y=randomIntFromRange(250,450);
+				y=randomIntFromRange(250,400);
 				x=randomIntFromRange(500,1000-width);
 			}
 
@@ -182,7 +182,7 @@ io.sockets.on('connection', function(socket)
 						}
 						else
 						{	
-							y=randomIntFromRange(250,450);
+							y=randomIntFromRange(250,400);
 							x=randomIntFromRange(500,1000-width);
 						}
 					 	j=-1;
@@ -197,9 +197,9 @@ io.sockets.on('connection', function(socket)
 
 
 			//On reset la goalBall
-			x = randomIntFromRange(0,950);
+			x = randomIntFromRange(150,950);
 			y = 35;
-			let radius = 20;
+			let radius = 60;
 			color = 'green';
 			var goalBall = goalBallJS.new(x,y,radius,color);
 			io.sockets.emit('newgoal',goalBall);
@@ -236,7 +236,7 @@ io.sockets.on('connection', function(socket)
 			}
 			else
 			{
-				y=randomIntFromRange(250,450);
+				y=randomIntFromRange(250,400);
 				x=randomIntFromRange(500,1000-width);
 			}
 
@@ -253,7 +253,7 @@ io.sockets.on('connection', function(socket)
 						}
 						else
 						{	
-							y=randomIntFromRange(250,450);
+							y=randomIntFromRange(250,400);
 							x=randomIntFromRange(500,1000-width);
 						}
 					 	j=-1;
@@ -267,9 +267,9 @@ io.sockets.on('connection', function(socket)
 			io.sockets.emit('newobs',obstacle);
 
 			//On reset la goalball
-			x = randomIntFromRange(20,950);
+			x = randomIntFromRange(150,950);
 			y = 35;
-			let radius = 20;
+			let radius = 60;
 			color = 'green';
 			var goalBall = goalBallJS.new(x,y,radius,color);
 			io.sockets.emit('newgoal',goalBall);
