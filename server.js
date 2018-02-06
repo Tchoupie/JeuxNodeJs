@@ -49,7 +49,7 @@ var io = require('socket.io').listen(server);
 var players = {};
 var obstacles = [];
 
-	for(var i=0;i<2;i++)
+	for(var i=0;i<3;i++)
 	{
 
 		let width=randomIntFromRange(100,500);
@@ -147,7 +147,7 @@ io.sockets.on('connection', function(socket)
 		//On reset les obsacles
 		obstacles = new Array();
 		io.sockets.emit('reset');
-		for(var i=0;i<2;i++)
+		for(var i=0;i<3;i++)
 		{
 
 			let width=randomIntFromRange(100,500);
@@ -218,7 +218,7 @@ io.sockets.on('connection', function(socket)
 	{
 		obstacles = new Array();
 		io.sockets.emit('reset');
-		for(var i=0;i<2;i++)
+		for(var i=0;i<3;i++)
 		{
 
 			let width=randomIntFromRange(100,500);
