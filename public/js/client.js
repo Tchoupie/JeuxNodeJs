@@ -82,6 +82,15 @@
 
 	socket.on('newgoal',function(OgoalBall)
 	{
+		OgoalBall.sprites = new Image();
+		OgoalBall.sprites.onload = function()
+		{
+			var s= 30/12;
+ 			ctx.drawImage(OgoalBall.sprites, 0,OgoalBall.srcY, 64,64, OgoalBall.x-12*s,OgoalBall.y-12*s, 64*s,64*s );
+		}
+
+		OgoalBall.sprites.src = "js/diamant.png";
+
 		OgoalBall.update = function()
 		{
 			OgoalBall.draw();
@@ -89,11 +98,12 @@
 
 		OgoalBall.draw = function()
 		{
-			ctx.beginPath();
+			/*ctx.beginPath();
 	 		ctx.arc(OgoalBall.x, OgoalBall.y, OgoalBall.radius, 0, Math.PI * 2, false);
 	 		ctx.fillStyle = OgoalBall.color;
  			ctx.fill();
- 			ctx.closePath();
+ 			ctx.closePath();*/
+ 			ctx.drawImage(OgoalBall.sprites, 0, 0, 64,64, OgoalBall.x-12*s,OgoalBall.y-12*s, 64*s,64*s );
 		}
 		goalBall = OgoalBall;
 	});

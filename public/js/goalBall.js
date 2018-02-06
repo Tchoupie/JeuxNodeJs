@@ -4,6 +4,8 @@ function GoalBall(x,y,radius,color)
  	this.y = y;
  	this.radius = radius;
  	this.color = color;
+ 	this.step = 0;
+ 	this.srcY = 0;
 
  	this.update = function()
 	{
